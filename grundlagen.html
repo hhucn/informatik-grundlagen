@@ -5,9 +5,7 @@
     <title>Grundlagen der Softwareentwicklung</title>
 </head>
 <body>
-<header>
 <h1>Grundlagen der Softwareentwicklung - Dinge, die jeder Informatiker wissen sollte</h1>
-</header>
 
 <p>Dieses Dokument fasst die Grundlagen der Softwareentwicklung zusammen, die für das Absolvieren der Übungen in Info 2, Netzwerksicherheit, sowie für viele Bachelor- und Masterarbeiten wichtig sind.</p>
 
@@ -55,14 +53,14 @@ Ein Prozess kann sich mit dem Systemaufruf <a href="http://linux.die.net/man/2/f
 
 <h2>Shell</h2>
 
-<p>Eine shell ermöglicht es, beliebige Programme mit beliebigen Optionen zu starten. Interaktive shells laufen normalerweise in einem grafischem <strong>Terminal</strong> emulator wie gnome-terminal, Konsole, xfce4-terminal, oder yakuake.</p>
+<p>Eine shell ermöglicht es, beliebige Programme mit beliebigen Optionen zu starten. Interaktive shells laufen normalerweise in einem grafischem <strong>Terminal</strong>-Emulator wie gnome-terminal, Konsole, xfce4-terminal, oder yakuake.</p>
 
 <p>Jeder Befehl wird mit <kbd>Enter</kbd> terminiert. Jeder Befehl kann drei Formen annehmen:</p>
 
 <ol>
 <li>Starten einer ausführbaren Datei, mit expliziter Pfad-Angabe.<br/>
 Mit <code>/bin/ls</code> kann die ausführbare Datei <code>ls</code> im Verzeichnis <code>/bin</code> ausgeführt werden. ls zeigt den Inhalt des aktuellen Verzeichnisses an.</li>
-<li>Starten einer ausführbaren Datei. Damit man nicht jedes Mal den gesamten Pfad eingeben muss, kann die shell automatisch das Program suchen. Das macht sie genau dann, wenn im Befehl kein Slash vorkommt. Dann wird in jedem Verzeichnis in dem doppelpunkt-getrennten Wert der Umgebungsvariable <code>PATH</code> gesucht. Darum kann man z.B. einfach <code>ls</code> eingeben, wenn der <code>PATH</code> <code>/usr/bin:/bin:/usr/local/bin</code> ist.</li>
+<li>Starten einer ausführbaren Datei. Damit man nicht jedes Mal den gesamten Pfad eingeben muss, kann die shell automatisch das Program suchen. Das macht sie genau dann, wenn im Befehl kein Slash vorkommt. Dann wird in jedem Verzeichnis in dem Doppelpunkt-getrennten Wert der Umgebungsvariable <code>PATH</code> gesucht. Darum kann man z.B. einfach <code>ls</code> eingeben, wenn der <code>PATH</code> <code>/usr/bin:/bin:/usr/local/bin</code> ist.</li>
 <li>Shell builtin: In manchen Fällen möchte man den Zustand der Shell selber verändern. Dafür fängt die Shell bestimmte Programmnamen ab und interpretiert sie selber. Zum Beispiel kann mit <code title="change directory">cd</code> das cwd gewechselt werden.</li>
 </ol>
 
@@ -81,14 +79,13 @@ Häufig verwendete Programme:
 * javac/java
 * gcc
 * as
+* man
 
 -->
 
-<h3>Aufgaben</h3>
+<h3>Aufgabe</h3>
 
-<ul>
-<li>Schreiben Sie eine einfache Shell, die alle oben erwähnten Features unterstützt.</li>
-</ul>
+Schreiben Sie eine einfache Shell, die alle oben erwähnten Features unterstützt.</li>
 
 <h3><a href="http://de.wikipedia.org/wiki/Byte-Reihenfolge">Endianness</a></h3>
 
