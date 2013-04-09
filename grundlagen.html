@@ -94,21 +94,19 @@ Häufig verwendete Programme:
 
 <p>Wenn eine CPU längere Zahlen speichert, verwendet sie dafür mehrere (Byte-große) Speicherplätze. Für die Anordung dieser Speicherplätze gibt es zwei verschiedene Philosophien:</p>
 
-<p><strong>Big Endian</strong> speichert das signifikanteste Bit zuerst. Die hexadezimale Zahl 0x01020304 wird dann wie folgt als 32-Bit-Zahl an den Adressen 1000 bis 1003 gespeichert:
+<p><strong>Big Endian</strong> speichert das signifikanteste Bit zuerst. Die hexadezimale Zahl 0x01020304 wird dann wie folgt als 32-Bit-Zahl an den Adressen 1000 bis 1003 gespeichert:</p>
 
 <table>
 <tr><th>Adresse</th><td>1000</td><td>1001</td><td>1002</td><td>1003</td></tr>
-<tr><th>Wert</th><td>0x01</td><td>0x02</td><td>0x03</th><td>0x04</td></tr>
+<tr><th>Wert</th><td>0x01</td><td>0x02</td><td>0x03</td><td>0x04</td></tr>
 </table>
-</p>
 
-<p><strong>Little Endian</strong> speichert das am wenigsten signifikanteste Bit zuerst. Die hexadezimale Zahl 0x01020304 wird dann wie folgt als 32-Bit-Zahl an den Adressen 1000 bis 1003 gespeichert:
+<p><strong>Little Endian</strong> speichert das am wenigsten signifikanteste Bit zuerst. Die hexadezimale Zahl 0x01020304 wird dann wie folgt als 32-Bit-Zahl an den Adressen 1000 bis 1003 gespeichert:</p>
 
 <table>
 <tr><th>Adresse</th><td>1000</td><td>1001</td><td>1002</td><td>1003</td></tr>
-<tr><th>Wert</th><td>0x04</td><td>0x03</td><td>0x02</th><td>0x01</td></tr>
+<tr><th>Wert</th><td>0x04</td><td>0x03</td><td>0x02</td><td>0x01</td></tr>
 </table>
-</p>
 
 <p>
 Die weitverbreitete x86-Architektur verwendet Little Endian.
@@ -116,6 +114,9 @@ Die weitverbreitete x86-Architektur verwendet Little Endian.
 
 <!-- TODO: String-Enkodierung -->
 
+<h3>Aufgabe</h3>
+
+<p>Schreiben Sie ein C-Programm, dass herausfindet, ob ihr Computer Big oder Little Endian verwendet.</p>
 
 </body>
 </html>
