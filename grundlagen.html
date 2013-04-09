@@ -27,20 +27,31 @@ Nennen Sie mindestens vier verschiedene Möglichkeiten, um auf die Datei <code>/
 
 <h2>Programme</h2>
 
-<p>Auf einem modernen Betriebssystem laufen mehrere Programme gleichzeitig. Wenn ein Programm gestartet wird, assoziiert das Betriebssystem (u.a.) die folgenden Eigenschaften:</p>
+<p>Auf einem modernen Betriebssystem laufen mehrere Programme gleichzeitig in verschiedenen <strong>Prozessen</strong>. Wenn ein Prozess gestartet wird, assoziiert das Betriebssystem (u.a.) die folgenden Eigenschaften:</p>
 
 <ul>
-<li>Identität des <strong>Benutzers</strong>, der das Programm gestartet hat. C-Programme können darauf mit <a href="http://linux.die.net/man/3/getuid"><code>getuid</code></a> zugreifen.</li>
+<li>Die zugeordnete Programmdatei wird in den Speicher des Prozesses abgebildet.</li>
+<li><strong>Identität</strong> des Prozesses. C-Programme können darauf mit <a href="http://linux.die.net/man/3/getpid"><code>getpid</code></a> zugreifen.</li>
+<li>Identität des <strong>Benutzers</strong>, der den Prozess gestartet hat. C-Programme können darauf mit <a href="http://linux.die.net/man/3/getuid"><code>getuid</code></a> zugreifen.</li>
 <li>Das <strong>cwd</strong>. C-Programme können darauf mit <a href="http://linux.die.net/man/3/getcwd"><code>getcwd</code></a> zugreifen.</li>
 <li><strong>Umgebungsvariablen</strong>, ein dictionary/Map von Binärstrings auf Binärstrings (z.B. <code>LC_ALL</code> ⇒ <code>de_DE.UTF-8</code>). Umgebungsvariablen können das Verhalten des Programmes verändern. Zum Beispiel kann mit der Umgebungsvariablen <code>LC_ALL</code> die Lokalisierung (Sprache) geändert werden. C-Programme können darauf mittels der Variable <a href="http://linux.die.net/man/5/environ"><code>environ</code></a> zugreifen.</li>
 <li>Wenn ein Programm gestartet wird, kann der Benutzer außerdem <strong>Argumente</strong> übergeben, um das Verhalten des Programmes zu ändern. Argumente sind eine Liste von Binärstrings, deren erstes Element (mit Index 0) der Name ist, mit dem das Programm gestartet wurde. Viele Programme geben z.B. Hilfestellungen aus, wenn irgendein Argument <code>--help</code> ist. In C kann man darauf mit den Argumenten der main-Methode (<code>argv</code> und <code>argc</code>) darauf zugreifen, in Java mit dem args-Argument der main-Methode, in Python mit <a href="http://docs.python.org/3/library/sys.html#sys.argv"><code>sys.argv</code></a>.</li>
+<li>Eine beliebige Nummer von Ein- und Ausgabekanälen, mittels deren das Programm kommunzieren kann. Mindestens sind die folgenden Kanäle verfügbar:
+<ul>
+    <li><code>stdin</code> (Eingabekanal, Nummer 0). Normalerweise die Eingaben des Benutzers.</li>
+    <li><code>stdout</code> (Ausgabekanal, Nummer 1). Für Programmausgaben gedacht.</li>
+    <li><code>stderr</code> (Ausgabekanal, Nummer 2). Für Fehlermeldungen.</li>
 </ul>
+</li>
+</ul>
+
+<p>
+Ein Prozess kann sich mit dem Systemaufruf <a href="http://linux.die.net/man/2/fork"><code>fork</code></a> inklusive aller Eigenschaften außer Prozess-Identität duplizieren. Mit <a href="http://linux.die.net/man/2/execve"><code>execve</code></a> kann ein Prozess die Ausführung eines beliebigen Programms starten. Diese beiden Systemaufrufe werden normalerweise kombiniert, um einen Kindprozess zu starten.
+</p>
 
 <h3>Aufgabe</h3>
 
-<p>Schreiben Sie ein Programm, das alle oben erwähnten Eigenschaften ausgibt.</p>
-
-<!-- TODO: Subprozesse/execve -->
+<p>Schreiben Sie ein Programm, das alle oben erwähnten Eigenschaften auf <code>stdout</code> ausgibt.</p>
 
 <h2>Shell</h2>
 
@@ -50,21 +61,60 @@ Nennen Sie mindestens vier verschiedene Möglichkeiten, um auf die Datei <code>/
 
 <ol>
 <li>Starten einer ausführbaren Datei, mit expliziter Pfad-Angabe.<br/>
-Mit <code>/bin/ls</code> kann die ausführbare Datei <code>ls</code> im Verzeichnis </code>/bin</code> ausgeführt werden. ls zeigt den Inhalt des aktuellen Verzeichnisses an.</li>
-<li>Starten einer ausführbaren Datei. Damit man nicht jedes </li>
+Mit <code>/bin/ls</code> kann die ausführbare Datei <code>ls</code> im Verzeichnis <code>/bin</code> ausgeführt werden. ls zeigt den Inhalt des aktuellen Verzeichnisses an.</li>
+<li>Starten einer ausführbaren Datei. Damit man nicht jedes Mal den gesamten Pfad eingeben muss, kann die shell automatisch das Program suchen. Das macht sie genau dann, wenn im Befehl kein Slash vorkommt. Dann wird in jedem Verzeichnis in dem doppelpunkt-getrennten Wert der Umgebungsvariable <code>PATH</code> gesucht. Darum kann man z.B. einfach <code>ls</code> eingeben, wenn der <code>PATH</code> <code>/usr/bin:/bin:/usr/local/bin</code> ist.</li>
 <li>Shell builtin: In manchen Fällen möchte man den Zustand der Shell selber verändern. Dafür fängt die Shell bestimmte Programmnamen ab und interpretiert sie selber. Zum Beispiel kann mit <code title="change directory">cd</code> das cwd gewechselt werden.</li>
+</ol>
+
+<p>In allen Fällen erlaubt die Shell auch die Übergabe von Argumenten. Dafür wird die eingegebene Zeile mit Leerzeichen getrennt. Z.B. kann man den Inhalt des aktuellen Verzeichnisses und von <code>/home</code> mit <code>ls . /home</code> angezeigt werden.</p>
+
+<p>Um Leer- und Sonderzeichen in den Argumenten zu vergeben, können entweder einfache oder doppelte Anführungszeichen verwendet werden, oder das betreffende Zeichen mit einem Backslash maskiert werden. Zum Beispiel können Sie den Inhalt des Verzeichnisses <code>Meine Bilder</code> mit <code>ls Meine\ Bilder</code>, <code>ls "Meine Bilder"</code> oder <code>ls 'Meine Bilder'</code> anzeigen.</p>
+
+<!-- TODO pipes, output redirection -->
+
+<!-- TODO
+
+Häufig verwendete Programme:
+
+* cat
+* less
+* javac/java
+* gcc
+* as
+
+-->
+
+<h3>Aufgaben</h3>
+
+<ul>
+<li>Schreiben Sie eine einfache Shell, die alle oben erwähnten Features unterstützt.</li>
 </ul>
 
-<p>In allen Fällen interpretiert die Shell </p>
+<h3><a href="http://de.wikipedia.org/wiki/Byte-Reihenfolge">Endianness</a></h3>
 
+<p>Wenn eine CPU längere Zahlen speichert, verwendet sie dafür mehrere (Byte-große) Speicherplätze. Für die Anordung dieser Speicherplätze gibt es zwei verschiedene Philosophien:</p>
 
-<!-- TODO: arguments -->
+<p><strong>Big Endian</strong> speichert das signifikanteste Bit zuerst. Die hexadezimale Zahl 0x01020304 wird dann wie folgt als 32-Bit-Zahl an den Adressen 1000 bis 1003 gespeichert:
 
-<!-- TODO: escaping -->
+<table>
+<tr><th>Adresse</th><td>1000</td><td>1001</td><td>1002</td><td>1003</td></tr>
+<tr><th>Wert</th><td>0x01</td><td>0x02</td><td>0x03</th><td>0x04</td></tr>
+</table>
+</p>
 
-<!-- TODO: Aufgaben hier -->
+<p><strong>Little Endian</strong> speichert das am wenigsten signifikanteste Bit zuerst. Die hexadezimale Zahl 0x01020304 wird dann wie folgt als 32-Bit-Zahl an den Adressen 1000 bis 1003 gespeichert:
 
-<!-- TODO: little endian / big endian -->
+<table>
+<tr><th>Adresse</th><td>1000</td><td>1001</td><td>1002</td><td>1003</td></tr>
+<tr><th>Wert</th><td>0x04</td><td>0x03</td><td>0x02</th><td>0x01</td></tr>
+</table>
+</p>
+
+<p>
+Die weitverbreitete x86-Architektur verwendet Little Endian.
+</p>
+
+<!-- TODO: String-Enkodierung -->
 
 
 </body>
