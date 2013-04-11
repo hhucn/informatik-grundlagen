@@ -1,15 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <title>Grundlagen der Softwareentwicklung</title>
+<meta charset="utf-8" />
+<title>Grundlagen der Softwareentwicklung</title>
+<style type="text/css">
+@media all and (min-width: 1000px) {
+    body {width: 1000px;}
+}
+
+h1 {text-align: center; margin: 0 0; font-size: 32px;}
+h1.subtitle {font-size: 24px;}
+body {margin: 0 auto;}
+p,code {font-size: inherit;}
+</style>
 </head>
 <body>
-<h1>Grundlagen der Softwareentwicklung - Dinge, die jeder Informatiker wissen sollte</h1>
+<header>
+<h1>Grundlagen der Softwareentwicklung</h1>
+<h1 class="subtitle">Dinge, die jeder Informatiker wissen sollte</h1>
+</header>
 
 <p>Dieses Dokument fasst die Grundlagen der Softwareentwicklung zusammen, die für das Absolvieren der Übungen in Info 2, Netzwerksicherheit, sowie für viele Bachelor- und Masterarbeiten wichtig sind.</p>
 
-<h2>Dateisystem/Pfade</h2>
+<h2 id="dateisystem">Dateisystem/Pfade</h2>
 
 <p>Ein Dateisystem erlaubt es, beliebige Inhalte unter Dateinamen zu speichern und mittels Verzeichnissen zu ordnen. Um auf eine bestehende Datei zu verweisen, verwendet man den <strong>Pfad</strong> einer Datei. Dieser kann entweder absolut oder relativ sein.</p>
 
@@ -17,13 +30,13 @@
 
 Weil es ziemlich umständlich wäre, jedes Mal den gesamten Verzeichnispfad zu berechnen und zu verwenden, kann man den Pfad auch relativ zum <strong>current working directory (cwd)</strong> angeben (dann fängt er nicht mit einem Slash an). Die speziellen Dateinamen <code>.</code> und <code>..</code> können verwendet werden, um auf das aktuelle und das übergeordnete Verzeichnis zu referenzieren.
 
-<h3>Aufgabe</h3>
+<h3 id="dateisystem-aufgabe">Aufgabe</h3>
 
 Nennen Sie mindestens vier verschiedene Möglichkeiten, um auf die Datei <code>/home/smith/foo/bar</code> zu verweisen, wenn das cwd <code>/home/smith/foo</code> ist.
 
 <!-- TODO: symlinks / hardlinks? -->
 
-<h2>Programme</h2>
+<h2 id="programme">Programme</h2>
 
 <p>Auf einem modernen Betriebssystem laufen mehrere Programme gleichzeitig in verschiedenen <strong>Prozessen</strong>. Wenn ein Prozess gestartet wird, assoziiert das Betriebssystem (u.a.) die folgenden Eigenschaften:</p>
 
@@ -47,11 +60,11 @@ Nennen Sie mindestens vier verschiedene Möglichkeiten, um auf die Datei <code>/
 Ein Prozess kann sich mit dem Systemaufruf <a href="http://linux.die.net/man/2/fork"><code>fork</code></a> inklusive aller Eigenschaften außer Prozess-Identität duplizieren. Mit <a href="http://linux.die.net/man/2/execve"><code>execve</code></a> kann ein Prozess die Ausführung eines beliebigen Programms starten. Diese beiden Systemaufrufe werden normalerweise kombiniert, um einen Kindprozess zu starten.
 </p>
 
-<h3>Aufgabe</h3>
+<h3 id="programme-aufgaben">Aufgabe</h3>
 
 <p>Schreiben Sie ein Programm, das alle oben erwähnten Eigenschaften auf <code>stdout</code> ausgibt.</p>
 
-<h2>Shell</h2>
+<h2 id="shell">Shell</h2>
 
 <p>Eine shell ermöglicht es, beliebige Programme mit beliebigen Optionen zu starten. Interaktive shells laufen normalerweise in einem grafischem <strong>Terminal</strong>-Emulator wie gnome-terminal, Konsole, xfce4-terminal, oder yakuake.</p>
 
@@ -83,11 +96,11 @@ Häufig verwendete Programme:
 
 -->
 
-<h3>Aufgabe</h3>
+<h3 id="shell-aufgabe">Aufgabe</h3>
 
 Schreiben Sie eine einfache Shell, die alle oben erwähnten Features unterstützt.</li>
 
-<h3><a href="http://de.wikipedia.org/wiki/Byte-Reihenfolge">Endianness</a></h3>
+<h3 id="endianess"><a href="http://de.wikipedia.org/wiki/Byte-Reihenfolge">Endianness</a></h3>
 
 <p>Wenn eine CPU längere Zahlen speichert, verwendet sie dafür mehrere (Byte-große) Speicherplätze. Für die Anordung dieser Speicherplätze gibt es zwei verschiedene Philosophien:</p>
 
@@ -111,9 +124,9 @@ Die weitverbreitete x86-Architektur verwendet Little Endian.
 
 <!-- TODO: String-Enkodierung -->
 
-<h3>Aufgabe</h3>
+<h3 id="endianess-aufgabe">Aufgabe</h3>
 
-<p>Schreiben Sie ein C-Programm, dass herausfindet, ob ihr Computer Big oder Little Endian verwendet.</p>
+<p>Schreiben Sie ein Programm (in C oder einer anderen Sprache Ihrer Wahl), dass herausfindet, ob ihr Computer Big oder Little Endian verwendet.</p>
 
 </body>
 </html>
